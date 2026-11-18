@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gotong-Royong Sign-Up · Taman Sri Andalas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Shantell+Sans:wght@700;800&family=Archivo:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --kraft: #f4ecd8;
+    --floor: #e9dfc8;
+    --ink: #2a2320;
+    --ink-soft: #5a4f45;
+    --tape-green: #1e6b3c;
+    --tape-amber: #e8a020;
+    --tape-red: #c8442a;
+    --tape-blue: #2b5d7c;
+    --shadow: 4px 4px 0 var(--ink);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--floor);
+    color: var(--ink);
+    font-family: "Archivo", Arial, sans-serif;
+    font-size: 19px;
+    line-height: 1.5;
+  }
+
+  /* ---- stall awning header ---- */
+  header { padding: 0; }
+  .awning {
+    background: repeating-linear-gradient(90deg, var(--tape-red) 0 48px, #b03720 48px 96px); /* data-impeccable-ignore="hard-offset-shadow, repeating-stripes-gradient" : deliberate pasar-awning stripes, the world's signature */
+    padding: 14px 10px 26px;
+    text-align: center;
+    border-bottom: 5px solid var(--ink);
+  }
+  .awning .banner {
+    display: inline-block;
+    background: var(--kraft);
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow);
+    padding: 10px 30px 12px;
+    transform: rotate(-.5deg);
+  }
+  .awning h1 {
+    font-family: "Shantell Sans", "Comic Sans MS", cursive;
+    font-weight: 800;
+    font-size: clamp(30px, 8vw, 44px);
+    letter-spacing: 1px;
+    color: var(--ink);
+    line-height: 1.05;
+  }
+  .substrip {
+    background: var(--tape-green);
+    color: #fdf6e3;
+    text-align: center;
+    padding: 12px 14px;
+    font-size: clamp(16px, 4vw, 20px);
+    font-weight: 700;
+    border-bottom: 5px solid var(--ink);
+  }
+
+  main { max-width: 640px; margin: 0 auto; padding: 20px 16px 90px; }
+
+  /* ---- region labels: marker caps with tape edge ---- */
+  .region {
+    margin-top: 34px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .region .no {
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    background: var(--ink);
+    color: var(--kraft);
+    font-family: "Shantell Sans", cursive;
+    font-weight: 800;
+    font-size: 24px;
+    display: flex; align-items: center; justify-content: center;
+    transform: rotate(-2deg);
+    border-radius: 4px;
+  }
+  .region h2 {
+    font-family: "Shantell Sans", "Comic Sans MS", cursive;
+    font-weight: 800;
+    font-size: clamp(22px, 6vw, 28px);
+    line-height: 1.15;
+    border-left: 10px solid var(--tape-amber);
+    padding-left: 12px;
+  }
+  .hint {
+    font-size: clamp(16px, 4vw, 18px);
+    color: var(--ink-soft);
+    margin: 10px 2px 16px 56px;
+  }
+
+  /* ---- kraft task cards ---- */
+  .card {
+    background: var(--kraft);
+    border: 3px solid var(--ink);
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    padding: 18px 18px 16px;
+    margin-bottom: 18px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform .08s ease;
+    position: relative;
+  }
+  .card:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+  .card.selected { outline: 5px solid var(--tape-red); outline-offset: 3px; }
+  .task-name {
+    font-family: "Shantell Sans", "Comic Sans MS", cursive;
+    font-weight: 800;
+    font-size: clamp(24px, 6.5vw, 30px);
+    line-height: 1.15;
+    color: var(--ink);
+    padding-right: 6px;
+  }
+  .task-sub { font-size: 17px; color: var(--ink-soft); margin-top: 4px; }
+  .tape-row {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin-top: 12px;
+  }
+  .tape {
+    display: inline-block;
+    padding: 6px 16px;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: .5px;
+    color: #fdf6e3;
+    background: var(--tape-green);
+    transform: rotate(-1deg);
+    box-shadow: 1px 2px 0 rgba(42,35,32,.4);
+    clip-path: polygon(0 6%, 3% 0, 97% 2%, 100% 8%, 99% 94%, 96% 100%, 3% 98%, 0 92%);
+  }
+  .tape.amber { background: var(--tape-amber); color: var(--ink); }
+  .tape.red { background: var(--tape-red); }
+  .tape.blue { background: var(--tape-blue); }
+  .who { margin-top: 10px; font-size: 17px; color: var(--ink-soft); }
+  .who strong { color: var(--ink); }
+  .tap-cue {
+    margin-top: 12px;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: var(--tape-red);
+  }
+  .stamp {
+    position: absolute;
+    top: -16px; right: 14px;
+    margin-top: 0;
+    background: var(--tape-red);
+    color: #fdf6e3;
+    font-family: "Shantell Sans", cursive;
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: 1px;
+    padding: 6px 16px;
+    transform: rotate(3deg);
+    border: 3px dashed #fdf6e3;
+    box-shadow: var(--shadow);
+    display: none;
+    z-index: 2;
+  }
+  .card.signed { margin-top: 26px; }
+  .card.signed .stamp { display: block; }
+  .task-detail {
+    margin-top: 12px;
+    border-top: 3px dashed rgba(42,35,32,.3);
+    padding-top: 12px;
+    font-size: 17px;
+    color: var(--ink);
+    display: none;
+  }
+  .card.selected .task-detail { display: block; }
+
+  /* ---- slots: timetable strips ---- */
+  .slot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 16px;
+  }
+  .slot-btn {
+    background: var(--kraft);
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow);
+    border-radius: 6px;
+    padding: 16px 14px;
+    text-align: center;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform .08s ease;
+  }
+  .slot-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+  .slot-btn .day {
+    font-family: "Shantell Sans", cursive;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--ink);
+    display: block;
+  }
+  .slot-btn .hours {
+    display: block;
+    font-size: 26px;
+    font-weight: 700;
+    margin-top: 2px;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .slot-btn .tape { margin-top: 10px; font-size: 15px; }
+  .slot-btn.chosen {
+    background: var(--tape-green);
+    outline: 5px solid var(--tape-red);
+    outline-offset: 3px;
+  }
+  .slot-btn.chosen .day, .slot-btn.chosen .hours { color: #fdf6e3; }
+  .slot-btn:disabled { opacity: .55; cursor: not-allowed; box-shadow: 2px 2px 0 var(--ink); }
+  .slot-btn:disabled .tape { background: var(--ink); color: var(--kraft); }
+
+  .confirm {
+    display: none;
+    margin-top: 18px;
+    background: var(--tape-red);
+    color: #fdf6e3;
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow);
+    padding: 16px 18px;
+    font-size: clamp(18px, 5vw, 21px);
+    font-weight: 700;
+    transform: rotate(-.4deg);
+  }
+  .confirm.show { display: block; }
+  .confirm .big {
+    font-family: "Shantell Sans", cursive;
+    font-weight: 800;
+    font-size: clamp(24px, 6vw, 30px);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ---- tools checklist ---- */
+  .tool-row {
+    width: 100%;
+    display: flex; align-items: center; gap: 16px;
+    background: var(--kraft);
+    border: 3px solid var(--ink);
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    font-size: 19px;
+  }
+  .tool-row:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+  .box {
+    flex-shrink: 0;
+    width: 38px; height: 38px;
+    border: 4px solid var(--ink);
+    border-radius: 4px;
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    font-weight: 800;
+    color: transparent;
+  }
+  .tool-row.checked { background: #eef3e4; }
+  .tool-row.checked .box { background: var(--tape-green); color: #fdf6e3; }
+  .tool-name { font-weight: 700; display: block; }
+  .tool-note { display: block; font-size: 15px; color: var(--ink-soft); margin-top: 2px; }
+
+  /* ---- reminder: big notice tape ---- */
+  .notice {
+    margin-top: 26px;
+    background: var(--tape-amber);
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow);
+    padding: 20px 18px;
+    transform: rotate(-.5deg);
+  }
+  .notice h3 {
+    font-family: "Shantell Sans", cursive;
+    font-weight: 800;
+    font-size: clamp(22px, 6vw, 28px);
+    color: var(--ink);
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 8px;
+  }
+  .notice p { font-size: clamp(17px, 4.5vw, 20px); color: var(--ink); }
+  .notice p strong { text-decoration: underline; text-decoration-thickness: 3px; }
+  .notice.urgent { background: var(--tape-red); color: #fdf6e3; }
+  .notice.urgent h3, .notice.urgent p { color: #fdf6e3; }
+
+  footer {
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 15px;
+    padding: 26px 16px 40px;
+  }
+  footer .rule {
+    display: inline-block;
+    border-top: 3px dashed rgba(42,35,32,.4);
+    padding-top: 14px;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="awning">
+    <div class="banner"><h1>GOTONG-ROYONG</h1></div>
+  </div>
+  <div class="substrip">Taman Sri Andalas · Sabtu 28 Nov, 8 pagi · Dewan Komuniti</div>
+</header>
+
+<main>
+  <!-- REGION 1 -->
+  <section id="tasks">
+    <div class="region"><span class="no">1</span><h2>Kerja berat — tugas menunggu</h2></div>
+    <p class="hint">Tekan satu kad untuk lihat butiran &amp; pilih masa.</p>
+    <div id="task-list"></div>
+  </section>
+
+  <!-- REGION 2 -->
+  <section id="slots">
+    <div class="region"><span class="no">2</span><h2>Pilih masa anda</h2></div>
+    <p class="hint">Slot terbuka untuk: <strong id="slot-task-name">—</strong></p>
+    <div id="slot-grid" class="slot-grid"></div>
+    <div id="confirm" class="confirm" role="status"></div>
+  </section>
+
+  <!-- REGION 3 -->
+  <section id="tools">
+    <div class="region"><span class="no">3</span><h2>Alat &amp; peringatan</h2></div>
+    <p class="hint">Tandakan alat yang anda boleh bawa untuk: <strong id="tool-task-name">—</strong></p>
+    <div id="tool-list"></div>
+    <div id="notice" class="notice">
+      <h3>🔔 Peringatan mesra</h3>
+      <p id="notice-text"></p>
+    </div>
+  </section>
+</main>
+
+<footer><span class="rule">Gotong-Royong Sign-Up · Taman Sri Andalas 💚</span></footer>
+
+<script>
+const CLEANUP_DAY = new Date(2026, 10, 28, 8, 0);
+
+const tasks = [
+  {
+    id: "river",
+    name: "Bersih tebing sungai",
+    sub: "Belakang pasar — sampah & longkang tersumbat",
+    detail: "Jalan di sepanjang tebing sungai belakang pasar, kutip sampah masuk guni. Pakai kasut berhud dalam — tebing licin dan berlumpur.",
+    needed: 8,
+    slots: [
+      { id: "r1", day: "Sabtu", hours: "8:00–10:00", left: 3 },
+      { id: "r2", day: "Sabtu", hours: "10:00–12:00", left: 2 },
+      { id: "r3", day: "Ahad", hours: "8:00–10:00", left: 4 }
+    ],
+    tools: [
+      { name: "Sarung tangan getah", note: "Ada ganti di khemah dewan." },
+      { name: "Guni sampah besar", note: "Disediakan di tempat berkumpul." },
+      { name: "Kasut berhud / boot", note: "Bawa sendiri — tebing berlumpur." }
+    ],
+    signed: ["Aisyah", "Ravi", "Pak Dollah"]
+  },
+  {
+    id: "playground",
+    name: "Cuci playground",
+    sub: "Taman permainan, Jalan Cempaka",
+    detail: "Gosok & bilas permainan dengan air sabun. Baldi, sabun dan berus disediakan — bawa tenaga sahaja!",
+    needed: 5,
+    slots: [
+      { id: "p1", day: "Sabtu", hours: "8:00–9:30", left: 2 },
+      { id: "p2", day: "Sabtu", hours: "9:30–11:00", left: 1 }
+    ],
+    tools: [
+      { name: "Berus ketat", note: "Berus pemegang panjang disediakan." },
+      { name: "Tuala lama", note: "Untuk keringkan gelongsor selepas bilas." },
+      { name: "Botol air", note: "Cuaca panas selepas 10 pagi." }
+    ],
+    signed: ["Mei Ling", "Jonas"]
+  },
+  {
+    id: "garden",
+    name: "Kemas kebun komuniti",
+    sub: "Sebelah dewan — kerja ringan, sesuai semua",
+    detail: "Tarik rumput, sapu daun dan pasu semula anak pokok di kebun sebelah dewan. Kerja ringan, sesuai untuk warga emas.",
+    needed: 6,
+    slots: [
+      { id: "g1", day: "Sabtu", hours: "7:30–9:00", left: 4 },
+      { id: "g2", day: "Ahad", hours: "7:30–9:00", left: 5 }
+    ],
+    tools: [
+      { name: "Sarung tangan kebun", note: "Lindungi tangan dari duri." },
+      { name: "Cangkul kecil", note: "Ada beberapa untuk dikongsi." },
+      { name: "Topi / tudung", note: "Kebun tiada tempat berteduh." }
+    ],
+    signed: ["Pak Dollah", "Grace", "Sam & Lily"]
+  },
+  {
+    id: "corridor",
+    name: "Basuh laluan & tong sampah",
+    sub: "Laluan surau & kawasan tong sampah",
+    detail: "Basuh kawasan tong sampah dan sapu laluan surau. Sandal getah disyorkan — lantai basah.",
+    needed: 4,
+    slots: [
+      { id: "c1", day: "Ahad", hours: "9:00–10:30", left: 4 }
+    ],
+    tools: [
+      { name: "Penyapu", note: "Bawa satu jika ada — kurang dua." },
+      { name: "Kasut getah", note: "Lantai akan basah." }
+    ],
+    signed: ["Rosnah"]
+  }
+];
+
+let selectedTaskId = tasks[0].id;
+const chosenSlot = {};
+const checkedTools = {};
+
+const $ = (id) => document.getElementById(id);
+const getTask = (id) => tasks.find(t => t.id === id);
+
+function daysUntil() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const day = new Date(CLEANUP_DAY); day.setHours(0,0,0,0);
+  return Math.round((day - today) / 86400000);
+}
+
+function tapeFor(spotsLeft, needed) {
+  if (spotsLeft <= 0) return { cls: "", text: "PENUH — cuba slot lain" };
+  if (spotsLeft <= 2) return { cls: "amber", text: `TINGGAL ${spotsLeft} TEMPAT` };
+  return { cls: "", text: `PERLU ${needed} ORANG` };
+}
+
+function renderTasks() {
+  const list = $("task-list");
+  list.innerHTML = "";
+  tasks.forEach(t => {
+    const spots = t.slots.reduce((n, s) => n + s.left, 0);
+    const tp = tapeFor(spots, t.needed);
+    const btn = document.createElement("button");
+    btn.className = "card" + (t.id === selectedTaskId ? " selected" : "") + (chosenSlot[t.id] ? " signed" : "");
+    btn.setAttribute("aria-pressed", t.id === selectedTaskId);
+    btn.innerHTML = `
+      <span class="stamp">DAH DAFTAR!</span>
+      <div class="task-name">${t.name}</div>
+      <div class="task-sub">${t.sub}</div>
+      <div class="tape-row">
+        <span class="tape ${tp.cls}">${tp.text}</span>
+        <span class="tape blue">${spots} tempat kosong</span>
+      </div>
+      <div class="who">Sudah daftar: <strong>${t.signed.join(", ")}</strong></div>
+      <div class="task-detail">${t.detail}</div>
+      <div class="tap-cue">👆 TEKAN UNTUK PILIH</div>`;
+    btn.addEventListener("click", () => {
+      selectedTaskId = t.id;
+      renderAll();
+      $("slots").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    list.appendChild(btn);
+  });
+}
+
+function renderSlots() {
+  const t = getTask(selectedTaskId);
+  $("slot-task-name").textContent = t ? t.name : "—";
+  const grid = $("slot-grid");
+  grid.innerHTML = "";
+  t.slots.forEach(s => {
+    const chosen = chosenSlot[t.id] === s.id;
+    const btn = document.createElement("button");
+    btn.className = "slot-btn" + (chosen ? " chosen" : "");
+    btn.innerHTML = `
+      <span class="day">${s.day}</span>
+      <span class="hours">${s.hours}</span>
+      <span class="tape ${s.left <= 2 ? "amber" : ""}">${chosen ? "PILIHAN ANDA" : s.left > 0 ? s.left + " tempat" : "PENUH"}</span>`;
+    btn.disabled = s.left <= 0 && !chosen;
+    btn.addEventListener("click", () => {
+      chosenSlot[t.id] = s.id;
+      s.left -= 1;
+      t.signed.push("Anda");
+      renderAll();
+      const c = $("confirm");
+      c.innerHTML = `<span class="big">✋ DAH DAFTAR!</span> Terima kasih! "${t.name}" — ${s.day} ${s.hours}. Jumpa di dewan!`;
+      c.classList.add("show");
+      $("tools").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    grid.appendChild(btn);
+  });
+}
+
+function renderTools() {
+  const t = getTask(selectedTaskId);
+  $("tool-task-name").textContent = t ? t.name : "—";
+  const list = $("tool-list");
+  list.innerHTML = "";
+  if (!checkedTools[t.id]) checkedTools[t.id] = new Set();
+  t.tools.forEach(tool => {
+    const on = checkedTools[t.id].has(tool.name);
+    const row = document.createElement("button");
+    row.className = "tool-row" + (on ? " checked" : "");
+    row.setAttribute("aria-pressed", on);
+    row.innerHTML = `<span class="box">✓</span>
+      <span><span class="tool-name">${tool.name}</span><span class="tool-note">${tool.note}</span></span>`;
+    row.addEventListener("click", () => {
+      on ? checkedTools[t.id].delete(tool.name) : checkedTools[t.id].add(tool.name);
+      renderTools();
+    });
+    list.appendChild(row);
+  });
+}
+
+function renderNotice() {
+  const d = daysUntil();
+  const dayStr = CLEANUP_DAY.toLocaleDateString("ms-MY", { weekday: "long", day: "numeric", month: "long" });
+  const notice = $("notice");
+  let msg;
+  if (d > 3) {
+    msg = `Hari gotong-royong: <strong>${dayStr}, 8 pagi</strong> di Dewan Komuniti. ` +
+          `Peringatan akan mula <strong>3 hari sebelum</strong>. Jumpa nanti!`;
+    notice.className = "notice";
+  } else if (d >= 0) {
+    msg = d === 0
+      ? `<strong>HARI INI!</strong> Gotong-royong bermula 8 pagi di Dewan Komuniti. Bawa alat anda, datang 10 minit awal!`
+      : `<strong>${d} hari lagi!</strong> Sabtu ${dayStr.split(", ")[1]}, 8 pagi di Dewan Komuniti. ` +
+        `Sila datang 10 minit awal — dan bawa alat yang anda tandakan di bawah.`;
+    notice.className = "notice urgent";
+  } else {
+    msg = `Hari gotong-royong telah berlalu — terima kasih kepada semua yang hadir! 💚`;
+    notice.className = "notice";
+  }
+  $("notice-text").innerHTML = msg;
+}
+
+function renderAll() {
+  renderTasks();
+  renderSlots();
+  renderTools();
+  renderNotice();
+}
+
+renderAll();
+</script>
+</body>
+</html>
